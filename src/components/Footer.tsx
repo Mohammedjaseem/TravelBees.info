@@ -1,5 +1,6 @@
 import React from "react";
 import { Phone, Mail, MapPin, Instagram } from "lucide-react";
+import logo from "../assets/logo_bgremover.png"; // Adjust the path as necessary
 
 const Footer: React.FC = () => (
   <footer className="bg-gray-900 text-white pt-12 pb-8">
@@ -8,10 +9,8 @@ const Footer: React.FC = () => (
       <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
         {/* Logo + Description */}
         <div>
-          <h3 className="text-2xl font-bold">
-            Travel<span className="text-yellow-400">Bees</span>
-          </h3>
-          <p className="mt-4 text-gray-300 leading-relaxed">
+          <img src={logo} alt="Travel Bees Logo" className=" mb-4" />
+          <p className="text-gray-300 leading-relaxed">
             Your trusted partner for career growth, global education, and
             unforgettable travel experiences.
           </p>

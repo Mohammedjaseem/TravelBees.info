@@ -1,1 +1,57 @@
-node_moduless
+# node modules
+node_modules/
+
+# production build
+dist/
+build/
+
+# system files
+.DS_Store
+Thumbs.db
+
+# local env files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# editor folders
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# coverage reports
+coverage/
+
+# eslint cache
+.eslintcache
+
+# Optional: If using Next.js or Vite
+.next/
+.cache/
+out/
+
+# Optional: If using Tailwind CSS JIT
+.tailwind-cache/
+
+# Optional: If using React Native WebView cache
+.expo/
+
+# Optional: If using Dropbox or syncing services
+.dropbox.cache/
+
+# Optional: Mac OS swap files
+*.swp
+
+# Optional: VSCode settings
+.vscode/settings.json
