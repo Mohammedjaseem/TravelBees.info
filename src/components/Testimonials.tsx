@@ -12,7 +12,7 @@ const testimonials = [
     rating: 5,
   },
   {
-    name: "Jassem T P",
+    name: "Jaseem T P",
     role: "Software Engineer",
     location: "Kochi → Dubai",
     content:
