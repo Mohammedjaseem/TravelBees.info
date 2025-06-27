@@ -1,46 +1,200 @@
-import React from 'react';
-import { Award, Target, Heart, Shield } from 'lucide-react';
+import React, { useEffect, useRef } from "react";
+import {
+  CheckCircle,
+  Phone,
+  MapPin,
+  Award,
+  Users2,
+  LucideIcon,
+} from "lucide-react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
-const About = () => {
+/* ── Static data ───────────────────────────── */
+const stats = [
+  { label: "Posts", value: 54 },
+  { label: "Followers", value: 269 },
+  { label: "Following", value: 517 },
+] as const;
+
+const bullets = [
+  "Job recruitment solutions",
+  "Tours & Travels",
+  "Abroad placement assistance",
+  "Airline Ticketing",
+  "Personality development programs",
+] as const;
+
+/* ── Types ─────────────────────────────────── */
+interface CounterProps {
+  value: number;
+  label: string;
+}
+
+interface BadgeProps {
+  icon: LucideIcon;
+  label: string;
+}
+
+/* ── Helpers ───────────────────────────────── */
+const useAOS = () => {
+  useEffect(() => {
+    AOS.init({ once: true, duration: 700, offset: 120 });
+  }, []);
+};
+
+const useCountUp = (target: number, duration = 1000) => {
+  const ref = useRef<HTMLParagraphElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    let start = 0;
+    const increment = target / (duration / 16); // ~60fps
+
+    const tick = () => {
+      start += increment;
+      if (start < target) {
+        el.textContent = Math.ceil(start).toString();
+        requestAnimationFrame(tick);
+      } else {
+        el.textContent = target.toString();
+      }
+    };
+
+    /* Trigger when scrolled into view */
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          tick();
+          io.disconnect();
+        }
+      },
+      { threshold: 0.6 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [target, duration]);
+
+  return ref;
+};
+
+/* ── Components ────────────────────────────── */
+const Counter: React.FC<CounterProps> = ({ value, label }) => {
+  const ref = useCountUp(value, 1200);
   return (
-    <section id="about" className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">About Travels Bees</h2>
-            <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              With over 15 years of experience in the consulting industry, Travels Bees has established itself as a trusted partner for individuals and organizations seeking comprehensive solutions for career advancement, international opportunities, and travel experiences.
-            </p>
-            <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              Our team of expert consultants brings together deep industry knowledge, extensive global networks, and a commitment to excellence that ensures our clients achieve their goals efficiently and effectively.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <div className="flex items-center bg-blue-50 px-4 py-2 rounded-lg">
-                <Award className="w-5 h-5 text-blue-600 mr-2" />
-                <span className="text-blue-800 font-semibold">ISO Certified</span>
-              </div>
-              <div className="flex items-center bg-green-50 px-4 py-2 rounded-lg">
-                <Shield className="w-5 h-5 text-green-600 mr-2" />
-                <span className="text-green-800 font-semibold">Trusted Partner</span>
-              </div>
+    <div className="space-y-1">
+      <p ref={ref} className="text-3xl font-extrabold text-blue-900" />
+      <p className="text-sm tracking-wide text-gray-600">{label}</p>
+    </div>
+  );
+};
+
+const Badge: React.FC<BadgeProps> = ({ icon: Icon, label }) => (
+  <span className="inline-flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 text-sm font-medium shadow hover:shadow-md transition">
+    <Icon className="h-4 w-4 text-blue-600" />
+    {label}
+  </span>
+);
+
+/* ── Main About Section ────────────────────── */
+const About: React.FC = () => {
+  useAOS();
+
+  return (
+    <section id="about" className="relative overflow-hidden">
+      {/* Hero banner */}
+      <div className="relative h-[320px] sm:h-[420px] lg:h-[500px] w-full">
+        <img
+          src="https://images.pexels.com/photos/1008155/pexels-photo-1008155.jpeg"
+          alt="Traveler overlooking mountains"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/40" />
+        <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center text-white">
+          <h2
+            data-aos="fade-down"
+            className="mb-3 text-3xl font-extrabold tracking-wide sm:text-4xl lg:text-5xl"
+          >
+            Meet <span className="text-yellow-400">Travel Bees</span>
+          </h2>
+          <p
+            data-aos="fade-up"
+            data-aos-delay="150"
+            className="max-w-xl text-sm text-blue-100 sm:text-lg"
+          >
+            Career &amp; holiday specialists guiding dreams beyond borders for
+            15&nbsp;years.
+          </p>
+        </div>
+      </div>
+
+      {/* Main card */}
+      <div className="-mt-24 lg:-mt-32 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div
+          data-aos="zoom-in"
+          className="grid gap-12 rounded-3xl bg-white/70 p-8 ring-1 ring-gray-200 backdrop-blur-lg shadow-2xl md:p-12 lg:grid-cols-2"
+        >
+          {/* Left column */}
+          <div className="flex flex-col justify-between space-y-10">
+            {/* Counters */}
+            <div
+              data-aos="fade-right"
+              data-aos-delay="200"
+              className="flex justify-around text-center"
+            >
+              {stats.map((s) => (
+                <Counter key={s.label} {...s} />
+              ))}
+            </div>
+
+            {/* Contact box */}
+            <div
+              data-aos="fade-right"
+              data-aos-delay="350"
+              className="rounded-xl bg-blue-600/10 p-6 shadow-sm"
+            >
+              <a
+                href="tel:+916282060608"
+                className="mb-2 inline-flex items-center gap-2 font-semibold text-blue-800 transition hover:text-blue-700"
+              >
+                <Phone className="h-5 w-5" /> +91 62820 60608
+              </a>
+              <p className="inline-flex items-center gap-2 text-gray-700">
+                <MapPin className="h-5 w-5 text-red-600" />
+                Chekanoor • Edappal • Malappuram
+              </p>
             </div>
           </div>
-          
-          <div className="grid grid-cols-2 gap-6">
-            <div className="bg-gradient-to-br from-blue-500 to-blue-600 text-white p-6 rounded-xl">
-              <Target className="w-10 h-10 mb-4" />
-              <h3 className="text-lg font-bold mb-2">Our Mission</h3>
-              <p className="text-sm text-blue-100">Empowering individuals to achieve their career and travel aspirations through expert guidance and comprehensive support.</p>
-            </div>
-            <div className="bg-gradient-to-br from-yellow-500 to-yellow-600 text-white p-6 rounded-xl">
-              <Heart className="w-10 h-10 mb-4" />
-              <h3 className="text-lg font-bold mb-2">Our Values</h3>
-              <p className="text-sm text-yellow-100">Integrity, excellence, and client-centric approach form the foundation of everything we do.</p>
-            </div>
-            <div className="bg-gradient-to-br from-emerald-500 to-emerald-600 text-white p-6 rounded-xl col-span-2">
-              <Award className="w-10 h-10 mb-4" />
-              <h3 className="text-lg font-bold mb-2">Why Choose Us</h3>
-              <p className="text-sm text-emerald-100">Proven track record, personalized service, global network, and end-to-end support for all your consulting needs.</p>
+
+          {/* Right column */}
+          <div className="space-y-6">
+            <h3 className="text-2xl font-semibold text-blue-900">
+              What We Do
+            </h3>
+
+            <p className="leading-relaxed text-gray-700">
+              From <strong>global education counselling</strong> and{" "}
+              <strong>career placement</strong> to
+              <strong> bespoke travel planning</strong>, Travel Bees is the
+              one-stop partner that simplifies every overseas ambition.
+            </p>
+
+            {/* Bullet grid */}
+            <ul className="mt-4 grid gap-x-6 gap-y-3 sm:grid-cols-2">
+              {bullets.map((line) => (
+                <li key={line} className="flex items-start text-gray-800">
+                  <CheckCircle className="mr-2 mt-0.5 h-5 w-5 text-yellow-500" />
+                  {line}
+                </li>
+              ))}
+            </ul>
+
+            {/* Badges */}
+            <div className="mt-6 flex flex-wrap gap-4">
+              <Badge icon={Award} label="ISO-Certified" />
+              <Badge icon={Users2} label="1000+ Clients" />
             </div>
           </div>
         </div>
