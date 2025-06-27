@@ -10,19 +10,11 @@ const Footer: React.FC = () => (
         {/* Logo + Description */}
         <div>
           <img src={logo} alt="Travel Bees Logo" className=" mb-4" />
-          <p className="text-gray-300 leading-relaxed">
+          {/* <p className="text-gray-300 leading-relaxed">
             Your trusted partner for career growth, global education, and
             unforgettable travel experiences.
-          </p>
+          </p> */}
 
-          <a
-            href="https://www.instagram.com/travelbees49/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-6 inline-flex h-9 w-9 items-center justify-center rounded-lg bg-pink-600 transition hover:bg-pink-700"
-          >
-            <Instagram className="h-5 w-5" />
-          </a>
         </div>
 
         {/* Services */}
@@ -75,6 +67,18 @@ const Footer: React.FC = () => (
                 className="hover:text-white"
               >
                 travelbeescknr@gmail.com
+              </a>
+            </div>
+
+            <div className="flex items-center">
+              <Instagram className="mr-3 h-5 w-5 text-yellow-400" />
+              <a
+                href="https://www.instagram.com/travelbees49/"
+                target="_blank"
+                rel="noopener noreferrer"    
+                className="hover:text-white"
+              >
+                Instagram
               </a>
             </div>
 
