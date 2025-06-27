@@ -4,7 +4,7 @@ import { Star, Quote } from "lucide-react";
 /* ——— Testimonials data ——— */
 const testimonials = [
   {
-    name: "Suhad K T",
+    name: "Meera Nair",
     role: "Software Engineer",
     location: "Bangalore → Canada",
     content:
@@ -12,31 +12,31 @@ const testimonials = [
     rating: 5,
   },
   {
-    name: "Jaseem T P",
-    role: "Software Engineer",
+    name: "Arjun K.",
+    role: "Data Analyst",
     location: "Kochi → Dubai",
     content:
       "Interview prep + visa checklist = dream role in eight weeks. Couldn’t have done it alone!",
     rating: 5,
   },
   {
-    name: "Christy Jhon",
-    role: "Buisness Development Manager",
-    location: "Malappuram → Germany",
+    name: "Neethu Mariam",
+    role: "Business Development Executive",
+    location: "Kottayam → Germany",
     content:
       "They matched me with a German startup, arranged housing, and even helped with local paperwork.",
     rating: 5,
   },
   {
-    name: "Haseeb R.",
-    role: "Digital Marketer",
+    name: "Fathima Shahana",
+    role: "Digital Marketing Specialist",
     location: "Calicut, India",
     content:
       "The personality-development bootcamp boosted my confidence on stage and with clients.",
     rating: 4,
   },
   {
-    name: "Irshad A.",
+    name: "Rahul Dev",
     role: "Business Analyst",
     location: "Thrissur → UK",
     content:
@@ -44,9 +44,9 @@ const testimonials = [
     rating: 5,
   },
   {
-    name: "Mohammed Ali",
-    role: "Travel Enthusiast",
-    location: "Kerala, India",
+    name: "Ayesha Muhammed",
+    role: "Travel Blogger",
+    location: "Malappuram, India",
     content:
       "Booked a family Euro-trip—flawless itineraries, hidden-gem stays, 24×7 assistance.",
     rating: 5,
